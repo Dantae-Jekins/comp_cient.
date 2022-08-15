@@ -1,0 +1,10 @@
+Entrega:
+
+- 1 a 2 pessoas: Entregar apenas uma vez com o nome do grupo
+- Pode ser o Github ou Repl.it
+
+Fazer um módulo que converte
+Pé -> Metros -> Pé: Entrada do usuário que define a conversão
+1 pé = 0,3048 metros
+1 metro = 3,281 pés
+Entregar 1 código por grupo de 2
