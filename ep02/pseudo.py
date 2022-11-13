@@ -34,6 +34,7 @@ def gradient_descent(y, x0, x1, n=100, limite = 10e-6, alpha = 0.01):
     Continua com outras coisas
     -> registrar os erros
     -> registrar os coeficientes (a, b, c)
+
 """
 import numpy as np;
 import pandas as pd;
@@ -44,7 +45,7 @@ def sigmoidal(a1, a2, a3, x1, x2):
 
 def perda(y: np.array, p: np.array):
     N = len(y);
-    values = (y * np.log(p) + (y-1) * np.log(1 - p)); 
+    values = - (y * np.log(p) + (1 - y) * np.log(1 - p)); 
     return np.sum(values)/N;
 
 def gradiente(a1, a2, a3, x1, x2, y):
@@ -54,16 +55,15 @@ def gradiente(a1, a2, a3, x1, x2, y):
     grada3 = np.sum(sigmoidal(a1, a2, a3, x1, x2) - y)/N
     return grada1, grada2, grada3;
 
-def classificador(y, x1, x2, iters = 10000, alpha = 1e-3, lim = 1e-4):
+def classificador(y, x1, x2, iters = 10000, alpha = 1e-4, lim = 1e-4):
     N = len(y);
     count = 0;
-    a1 = 0.1;
+    a1 = 0.05;
     a2 = 0.1;
-    a3 = 1; 
+    a3 = 4; 
     err_atual = 0;
     err_anter = float('inf');
-    erros = np.empty(shape=N, dtype=np.float64);
-
+    erros = []
     for i in range(1,iters):
         estimados = sigmoidal(a1, a2, a3, x1, x2);
         err_atual = perda(y, estimados); 
@@ -72,7 +72,7 @@ def classificador(y, x1, x2, iters = 10000, alpha = 1e-3, lim = 1e-4):
             print("Coeficientes encontrados {} iterações".format(count));
             print(" a1 = {}\n a2 = {}\n a3 = {}".format(a1, a2, a3));
             return a1, a2, a3, erros;
-        np.append(erros, err_atual);
+        erros.append(err_atual);
         
         #recálculo
         err_anter = err_atual;
