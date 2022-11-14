@@ -45,7 +45,7 @@ def sigmoidal(a1, a2, a3, x1, x2):
 
 def perda(y: np.array, p: np.array):
     N = len(y);
-    values = - (y * np.log(p) + (1 - y) * np.log(1 - p)); 
+    values = - (y * np.log(p) + (1 - y) * np.log(1 - p));
     return np.sum(values)/N;
 
 def gradiente(a1, a2, a3, x1, x2, y):
@@ -58,14 +58,15 @@ def gradiente(a1, a2, a3, x1, x2, y):
 def classificador(y, x1, x2, iters = 10000, alpha = 1e-4, lim = 1e-4):
     N = len(y);
     count = 0;
-    a1 = 0.05;
+    a1 = 0.1;
     a2 = 0.1;
-    a3 = 4; 
+    a3 = 1; 
     err_atual = 0;
     err_anter = float('inf');
     erros = []
     for i in range(1,iters):
         estimados = sigmoidal(a1, a2, a3, x1, x2);
+        print(estimados)
         err_atual = perda(y, estimados); 
         count+= 1;
         if (abs(err_atual - err_anter) <= lim): 
